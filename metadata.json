@@ -1,0 +1,8 @@
+{
+  "name": "Teachable Machine",
+  "description": "An interactive AI application that recognizes and learns from user-provided image or text data using few-shot machine learning with Gemini.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
