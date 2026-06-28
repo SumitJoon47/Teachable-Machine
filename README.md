@@ -11,6 +11,7 @@
 ---
 
 # 📖 Overview
+link:-[link to Excute your self](https://teachable-machine-432440930422.asia-southeast1.run.app)
 
 Traditional machine learning applications require collecting large datasets, training models, and deploying them before users can perform predictions.
 
