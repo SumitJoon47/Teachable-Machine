@@ -1,98 +1,522 @@
-# Teachable Machine — Interactive AI Learning Lab
+# 🧠 Teachable Machine – Interactive AI Learning Lab
 
-An interactive, responsive full-stack replica of Google's Teachable Machine, built using **React (TypeScript)**, **Vite**, **Express**, and the official **@google/genai** SDK. This application allows users to teach custom AI classifiers with few-shot training examples (either text or drawings/webcam photos) and run real-time inference using the power of Gemini 3.5.
+> An AI-powered, full-stack web application inspired by Google's Teachable Machine that enables users to create custom **text** and **image classifiers** using only a few labeled examples. Instead of training a new machine learning model, the application leverages **Google Large Language Model ) Learning** to instantly adapt to user-defined classification tasks.
 
----
-
-## 🚀 Key Features
-
-### 1. Two Interactive Classifier Modes
-- **Text Classifier**: Create custom classification categories (e.g., Sentiment analysis, Support ticket priority, Topic filters), write a handful of training examples, and evaluate new sample sentences.
-- **Image Classifier**: Create custom labels and provide training images using three convenient capture methods:
-  - 📂 **File Upload**: Drag and drop or browse local image files (PNG, JPG, GIF).
-  - 📷 **Live Webcam**: Snap real-time frames directly using your device's camera.
-  - 🎨 **Draw Sketch**: Draw elements on an interactive color sketch canvas inside the web page.
-
-### 2. Live Training Visualizer
-- Click **Train Model** to trigger an animated neural network sequence.
-- Watch real-time loss reduction, convergence line curves, and synapses pulsing signals as weights optimize in-context.
-
-### 3. Immediate Evaluation & Explanation
-- Evaluate new inputs in real-time.
-- View clear confidence score percentages mapped out in colored dynamic progress bars.
-- Read an AI-generated **Model Explanation** breaking down *why* the input was classified into that specific class based on your training examples.
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
+![Vite](https://img.shields.io/badge/Vite-Fast-purple?logo=vite)
+![Gemini](https://img.shields.io/badge/Google-Gemini-orange?logo=google)
 
 ---
 
-## 🛠️ Technology Stack
+# 📖 Overview
 
-- **Client**: React 19, TypeScript, Tailwind CSS, Lucide React (Icons), Canvas API (drawing)
-- **Server**: Express (Node.js), `tsx` (TypeScript Executor), Vite Middleware (for hot reload during development)
-- **AI Integrations**: `@google/genai` (SDK for Gemini 3.5 Flash)
-- **Compiler**: Vite, `esbuild` (Compiles the full backend to a single bundled, production-ready CommonJS file `dist/server.cjs`)
+Traditional machine learning applications require collecting large datasets, training models, and deploying them before users can perform predictions.
+
+This project demonstrates a modern AI workflow where users **teach the application using only a few examples**, allowing Gemini to perform intelligent classification through **Few-Shot Prompting (In-Context Learning)**.
+
+The application is generic and adaptable, enabling users to build custom classifiers for tasks such as:
+
+* 😊 Sentiment Analysis
+* 📩 Spam Detection
+* 🎫 Support Ticket Classification
+* 📝 Topic Classification
+* 🖼️ Image Recognition
+* 🐶 Animal Classification
+* 🌱 Plant Recognition
+* 🎨 Sketch Classification
+* And many more...
 
 ---
 
-## 📦 Project Setup
+# ✨ Features
 
-### 1. Prerequisites
-- **Node.js** (v18 or higher recommended)
-- **NPM** (v9 or higher)
+## 📝 Text Classification
 
-### 2. Environment Variables
-To connect the application to the Gemini API, you need to configure a secret environment variable. Create a `.env` file in the root directory and add:
+Create custom categories and provide your own examples.
 
-```env
-GEMINI_API_KEY="your_google_ai_studio_api_key_here"
+Example:
+
+```
+Positive
+- Amazing product
+- Loved it
+- Great experience
+
+Negative
+- Worst purchase
+- Terrible quality
+- Never buying again
 ```
 
-*Note: You can obtain an API key for free from [Google AI Studio](https://aistudio.google.com/).*
+Enter new text to receive:
 
-### 3. Installation
-Install the project dependencies:
+* Predicted Class
+* Confidence Score
+* AI-generated Explanation
+
+---
+
+## 🖼️ Image Classification
+
+Users can teach image categories using three different input methods.
+
+### 📂 Upload Images
+
+* PNG
+* JPG
+* JPEG
+* GIF
+
+### 📷 Webcam Capture
+
+Capture images directly from your webcam.
+
+### 🎨 Sketch Canvas
+
+Draw objects using an interactive HTML Canvas and classify your sketches.
+
+---
+
+## 📊 Training Visualization
+
+Although Gemini does not retrain its neural network, the application includes an educational visualization that simulates the machine learning process.
+
+Visualizations include:
+
+* Neural Network Animation
+* Signal Flow
+* Loss Curve
+* Convergence Graph
+* Weight Updates (Simulation)
+
+This helps users understand how traditional machine learning works while the application actually performs inference using Few-Shot Learning.
+
+---
+
+## 📈 Prediction Dashboard
+
+Each prediction displays:
+
+* Predicted Label
+* Confidence Percentages
+* Progress Bars
+* AI-generated Reasoning
+* Response Time
+
+---
+
+## 🔒 Secure API Architecture
+
+The Gemini API key is **never exposed to the browser**.
+
+All requests pass through an Express backend acting as a secure proxy.
+
+```
+Frontend
+      │
+      ▼
+Express Backend
+      │
+      ▼
+Google Gemini API
+```
+
+---
+
+# 🧠 AI Concepts Used
+
+## Few-Shot Learning
+
+Instead of training a new model, the application provides Gemini with a small number of labeled examples.
+
+Example:
+
+```
+Positive
+- I love this
+- Amazing service
+
+Negative
+- Worst product
+- Terrible support
+
+Input:
+"The service was fantastic"
+
+Prediction:
+Positive
+```
+
+Gemini recognizes the pattern from the examples without updating its model weights.
+
+---
+
+## In-Context Learning
+
+Each API request contains:
+
+* User-defined labels
+* Training examples
+* New input
+
+Gemini performs classification using only the provided context.
+
+No permanent model training occurs.
+
+---
+
+## Structured Output
+
+Responses are validated using structured JSON schemas to ensure consistent outputs.
+
+Example:
+
+```json
+{
+  "label": "Positive",
+  "confidence": 94,
+  "explanation": "The input expresses satisfaction similar to the positive examples."
+}
+```
+
+---
+
+# 🏗️ System Architecture
+
+```
+                   User
+                     │
+                     ▼
+          React + TypeScript UI
+                     │
+                     ▼
+        Collect Training Examples
+                     │
+                     ▼
+       Express API (Secure Backend)
+                     │
+        Prompt Construction Layer
+                     │
+                     ▼
+      Google Gemini 3.5 Flash API
+                     │
+                     ▼
+     JSON Classification Response
+                     │
+                     ▼
+     Prediction + Confidence + Explanation
+```
+
+---
+
+# 🔄 Data Flow
+
+```
+User
+
+│
+
+├── Creates Labels
+
+│
+
+├── Adds Examples
+
+│
+
+├── Clicks Train
+
+│
+
+▼
+
+Frontend stores examples
+
+│
+
+▼
+
+POST /api/classify
+
+│
+
+▼
+
+Express Backend
+
+│
+
+▼
+
+Prompt Builder
+
+│
+
+▼
+
+Gemini API
+
+│
+
+▼
+
+Prediction
+
+│
+
+▼
+
+Frontend Dashboard
+```
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React 19
+* TypeScript
+* Vite
+* Tailwind CSS
+* Lucide React
+* HTML Canvas API
+
+---
+
+## Backend
+
+* Express.js
+* Node.js
+* TypeScript
+* tsx
+
+---
+
+## AI
+
+* Google Gemini 3.5 Flash
+* @google/genai SDK
+
+---
+
+## Build Tools
+
+* Vite
+* esbuild
+
+---
+
+# 📂 Folder Structure
+
+```
+project/
+│
+├── client/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   └── assets/
+│
+├── server/
+│   ├── routes/
+│   ├── services/
+│   ├── prompts/
+│   └── server.ts
+│
+├── shared/
+│
+├── dist/
+│
+├── .env
+│
+├── package.json
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/teachable-machine-ai.git
+
+cd teachable-machine-ai
+```
+
+---
+
+## Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 4. Running the Development Server
-Start the development environment (Express server executing server-side API proxy routes and Vite handling the hot module server):
-```bash
-npm run dev
-```
-Open your browser and navigate to `http://localhost:3000`.
+---
 
-### 5. Production Build
-To build the application for production deployment (e.g., to Cloud Run or a container):
-```bash
-npm run build
-```
-This command compiles static client-side files into `dist/` and bundles the Express `server.ts` into a standalone optimized file (`dist/server.cjs`).
+## Configure Environment Variables
 
-To start the production server:
-```bash
-npm run start
+Create a `.env` file.
+
+```env
+GEMINI_API_KEY=YOUR_API_KEY
 ```
 
 ---
 
-## 🧠 Architectural Design
+## Start Development Server
 
-```
-                     ┌────────────────────────┐
-                     │   React Frontend UI    │
-                     └───────────┬────────────┘
-                                 │
-           POST /api/classify-text OR POST /api/classify-image
-                                 │
-                     ┌───────────▼────────────┐
-                     │ Express Backend Server │
-                     └───────────┬────────────┘
-                                 │  (Secured Server-Side Key)
-                     ┌───────────▼────────────┐
-                     │  Gemini 3.5 Flash API  │
-                     └────────────────────────┘
+```bash
+npm run dev
 ```
 
-1. **Secure API Handling**: The browser clients never see or touch the `GEMINI_API_KEY`. The frontend communicates with local Express proxy routes (`/api/classify-text` and `/api/classify-image`), which then execute the `@google/genai` model requests.
-2. **In-Context Learning (Few-Shot)**: Custom training labels and examples are structured dynamically into few-shot templates. This teaches the Gemini classifier your custom task boundaries on the fly without requiring expensive fine-tuning.
-3. **Structured Schema Validation**: Responses from Gemini are enforced using **Structured JSON Schemas** via the `@google/genai` SDK, ensuring the API always returns type-safe confidence percentages and explanations.
+Open:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🚀 Production Build
+
+Build
+
+```bash
+npm run build
+```
+
+Run
+
+```bash
+npm start
+```
+
+---
+
+# 💡 Example Workflow
+
+### Step 1
+
+Create Labels
+
+```
+Cat
+Dog
+Horse
+```
+
+---
+
+### Step 2
+
+Upload example images.
+
+---
+
+### Step 3
+
+Click **Train Model**
+
+(The application organizes examples into Few-Shot prompts.)
+
+---
+
+### Step 4
+
+Upload a new image.
+
+---
+
+### Step 5
+
+Receive:
+
+```
+Prediction
+
+Dog
+
+Confidence
+
+96%
+
+Reason
+
+The uploaded image shares visual characteristics with the Dog examples.
+```
+
+---
+
+# 🎯 Why This Project?
+
+Unlike traditional ML applications that require datasets and model training, this project demonstrates how **Large Language Models can adapt to new tasks using only user-provided examples**.
+
+Key strengths:
+
+* AI-powered classification
+* Few-Shot Learning
+* Prompt Engineering
+* Secure Backend API
+* Full-Stack Development
+* Interactive UI/UX
+* Image & Text Processing
+* Scalable Architecture
+
+---
+
+# 📚 Learning Outcomes
+
+Through this project, I gained hands-on experience with:
+
+* Full-Stack Web Development
+* Prompt Engineering
+* Few-Shot Learning
+* Google Gemini API Integration
+* Express API Development
+* TypeScript
+* React State Management
+* Secure API Handling
+* Structured JSON Validation
+* Interactive AI Application Design
+
+---
+
+# 🔮 Future Enhancements
+
+* User Authentication
+* Saved Projects
+* Database Integration
+* Model History
+* Project Sharing
+* Export Training Data
+* Real TensorFlow.js Training Mode
+* Custom Vision Models
+* Audio Classification
+* Speech Recognition
+* Drag-and-Drop Dataset Builder
+* Multi-label Classification
+
+---
+
+
+---
+
+## 👨‍💻 Author
+
+**Sumit Joon**
+
+GitHub: https://github.com/yourusername
+
+LinkedIn: https://linkedin.com/in/yourprofile
+
+Email: [joonsumit18@gmail.com](mailto:joonsumit18@gmail.com)
+
+---
+
+⭐ If you found this project useful, consider giving it a star!
