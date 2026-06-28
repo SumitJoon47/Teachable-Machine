@@ -11,7 +11,7 @@
 ---
 
 # 📖 Overview
-link:-[link to Excute your self](https://teachable-machine-432440930422.asia-southeast1.run.app)
+
 
 Traditional machine learning applications require collecting large datasets, training models, and deploying them before users can perform predictions.
 
@@ -512,9 +512,9 @@ Through this project, I gained hands-on experience with:
 
 **Sumit Joon**
 
-GitHub: https://github.com/yourusername
+GitHub: [https://github.com/yourusername](https://github.com/SumitJoon47)
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/sumit-joon-5413b228b/)
 
 Email: [joonsumit18@gmail.com](mailto:joonsumit18@gmail.com)
 
