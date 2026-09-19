@@ -1,4 +1,5 @@
 # 🧠 Teachable Machine – Interactive AI Learning Lab
+link-https://teachable-machine-432440930422.asia-southeast1.run.app/
 
 > An AI-powered, full-stack web application inspired by Google's Teachable Machine that enables users to create custom **text** and **image classifiers** using only a few labeled examples. Instead of training a new machine learning model, the application leverages **Google Large Language Model ) Learning** to instantly adapt to user-defined classification tasks.
 
